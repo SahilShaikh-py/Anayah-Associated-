@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C59341" />
+      <stop offset="50%" stop-color="#F3D389" />
+      <stop offset="100%" stop-color="#E9B872" />
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#DCE3EC" />
+      <stop offset="100%" stop-color="#8E9DAE" />
+    </linearGradient>
+  </defs>
+  <!-- Background with chamfered corners -->
+  <polygon points="10,2 54,2 62,10 62,54 54,62 10,62 2,54 2,10" fill="#05080E" stroke="rgba(233,184,114,0.4)" stroke-width="1.5" />
+  <!-- Architectural A Emblem -->
+  <!-- Left Leg (Gold) -->
+  <polygon points="14,48 24,48 34,14 26,14" fill="url(#goldGrad)" />
+  <!-- Right Leg (Silver/Steel) -->
+  <polygon points="38,14 46,14 50,48 40,48" fill="url(#silverGrad)" />
+  <!-- Golden Swoop / Arch -->
+  <path d="M 12,38 Q 32,24 52,29 Q 34,31 22,44 Z" fill="url(#goldGrad)" />
+  <!-- 4-Pane Window Grid Motif -->
+  <rect x="29" y="36" width="3" height="3" fill="#E9B872" />
+  <rect x="33" y="36" width="3" height="3" fill="#E9B872" />
+  <rect x="29" y="40" width="3" height="3" fill="#E9B872" />
+  <rect x="33" y="40" width="3" height="3" fill="#E9B872" />
+</svg>

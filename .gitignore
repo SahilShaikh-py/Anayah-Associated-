@@ -1,0 +1,9 @@
+# Raw uncompressed source videos & raw scratch assets (>100MB files rejected by GitHub)
+Assests/
+scratch/
+
+# OS and system files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log

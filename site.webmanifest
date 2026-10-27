@@ -1,0 +1,16 @@
+{
+  "name": "Anayah Associates",
+  "short_name": "Anayah",
+  "description": "Anayah Associates — Construction Company in Shrirampur, Ahilyanagar. Residential, Commercial, and Industrial Construction Since 2018.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05080e",
+  "theme_color": "#05080e",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
