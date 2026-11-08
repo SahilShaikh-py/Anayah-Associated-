@@ -9,56 +9,56 @@
   var P = 'assets/img/projects/';
   var projects = [
     { id: 'pathan-complex', cat: 'commercial', badge: 'Commercial · Multi-Storey', meta: 'Deolali Pravara · Tal-Rahuri', title: 'Pathan Commercial Complex', client: 'Client: Mr. Bashir Pathan', img: 'pathan-complex.webp', alt: 'Pathan Commercial Complex, Deolali Pravara',
-      sector: 'COMMERCIAL COMPLEX · MULTI-STOREY', mtitle: 'Pathan Commercial Complex', location: 'Deolali Pravara, Tal-Rahuri, Dist-Ahilyanagar', mclient: 'Mr. Bashir Pathan', scope: 'BPMS Tracing, 3D Elevation, RC Structural Design & Complete Execution',
-      desc: 'Multi-storey commercial business hub engineered for modern retail frontages and flexible corporate office modules. Incorporates wide-span RCC framing, energy-efficient glazing envelope, and automated municipal approval sanction under MahaBPMS.' },
+      sector: 'COMMERCIAL COMPLEX · MULTI-STOREY', mtitle: 'Pathan Commercial Complex', location: 'Deolali Pravara, Tal-Rahuri, Dist-Ahilyanagar', mclient: 'Mr. Bashir Pathan', scope: 'BPMS Drawing, 3D Front View, Concrete Structure Design & Full Construction',
+      desc: 'A multi-storey business building with shop fronts and flexible office space. It has wide-span concrete framing, energy-saving glass walls, and city approval done through MahaBPMS.' },
     { id: 'sai-shaneshwar', cat: 'industrial', badge: 'Industrial & Community', meta: 'Jatap · Ahilyanagar', title: 'Sai Shaneshwar Mangal Karyalay & Seed Plant', client: 'Client: Farmer Producer Co.', img: 'sai-shaneshwar-karyalay.webp', alt: 'Sai Shaneshwar Mangal Karyalay & Cotton Seed Processing',
-      sector: 'INDUSTRIAL & COMMUNITY', mtitle: 'Sai Shaneshwar Mangal Karyalay & Cotton Seed Oil Plant', location: 'Jatap, Ahilyanagar', mclient: 'Sai Shaneshwar Farmer Producer Company', scope: 'Industrial PEB & RC Design, Heavy Machinery Foundation, Community Auditorium',
-      desc: 'Large-scale dual-purpose landmark spanning heavy industrial processing for cotton seed oil extraction alongside an expansive, clear-span Mangal Karyalay community marriage hall accommodating thousands.' },
-    { id: 'hotel-ganraj', cat: 'commercial', badge: 'Hospitality Architecture', meta: 'Highway Corridor · Maharashtra', title: 'Hotel Ganraj Highway Landmark', client: 'Ganraj Hospitality', img: 'hotel-ganraj.webp', alt: 'Hotel Ganraj Highway Architecture',
-      sector: 'HOSPITALITY ARCHITECTURE', mtitle: 'Hotel Ganraj Highway Landmark', location: 'State Highway Corridor, Maharashtra', mclient: 'Ganraj Hospitality Group', scope: '3D Elevation Modeling, Master Site Planning, Turnkey Construction',
-      desc: 'Distinctive highway hospitality landmark designed with dramatic horizontal LED accent lighting, open-to-sky rooftop dining, expansive banquet hall, and high-flow vehicular circulation.' },
-    { id: 'aasif-bhai', cat: 'residential', badge: 'Luxury Residential Villa', meta: 'Islampura · Shrirampur', title: 'Aasif Bhai Luxury Residence', client: 'Client: Mr. Aasif Bhai', img: 'aasif-bhai-bungalow.webp', alt: 'Aasif Bhai Luxury Residence, Islampura',
-      sector: 'LUXURY RESIDENTIAL VILLA', mtitle: 'Aasif Bhai Residence', location: 'Islampura, Shrirampur', mclient: 'Mr. Aasif Bhai', scope: '3D Elevation, RC Structural Engineering, Turnkey Interior & Civil Execution',
-      desc: 'A bespoke two-storey luxury residence showcasing cantilevered floating balconies, vertical wood-textured louvers, dynamic exterior cove illumination, and landscaped terraces.' },
-    { id: 'gadhe-residence', cat: 'residential', badge: 'Contemporary Duplex Estate', meta: 'Shrirampur · Ahilyanagar', title: 'Gadhe Architectural Residence', client: 'Client: Gadhe Family', img: 'gadhe-residence-day.webp', alt: 'Gadhe Residence Architectural Duplex',
-      sector: 'CONTEMPORARY DUPLEX RESIDENCE', mtitle: 'Gadhe Residence (Day & Evening Landmark)', location: 'Shrirampur, Ahilyanagar', mclient: 'Mr. Gadhe & Family', scope: '3D Elevation (Day/Night Study), BPMS Tracing, RCC Detailing',
-      desc: 'Striking contemporary duplex bungalow featuring dramatic textured stone claddings, integrated planters, and specialized evening architectural illumination designed for timeless curb appeal.' },
-    { id: 'mangalmurti-residency', cat: 'commercial residential', badge: 'Residential & Commercial Tower', meta: 'Shrirampur · BPMS Sanction', title: 'Proposed Mangalmurti Residency', client: 'Mangalmurti Group', img: 'mangalmurti-residency.webp', alt: 'Proposed Mangalmurti Residency Tower',
-      sector: 'RESIDENTIAL & COMMERCIAL TOWER', mtitle: 'Proposed Mangalmurti Residency', location: 'Shrirampur, Dist-Ahilyanagar', mclient: 'Mangalmurti Developers', scope: 'BPMS Municipal Sanction, Structural RC Design, 3D Photorealistic Exterior',
-      desc: 'Iconic multi-storey residential apartment development combining ground-floor commercial showroom spaces with multi-family luxury apartments. Designed with seismic IS-1893 compliance and thermal-optimized facade geometry.' },
-    { id: 'dafal-bungalow', cat: 'residential', badge: 'Bespoke Bungalow Design', meta: 'Shrirampur · Maharashtra', title: 'Dafal Saheb Residence', client: 'Client: Mr. Dafal', img: 'dafal-bungalow.webp', alt: 'Dafal Saheb Residence',
-      sector: 'BESPOKE BUNGALOW DESIGN', mtitle: 'Dafal Saheb Residence', location: 'Shrirampur, Maharashtra', mclient: 'Mr. Dafal', scope: 'Architectural Elevation, RCC Framed Structure, Site Supervision',
-      desc: 'Grand private villa blending classical symmetrical grandeur with sleek modern architectural lines, expansive floor-to-ceiling windows, and meticulous structural stability.' },
-    { id: 'twin-bungalows', cat: 'residential', badge: 'Twin Villas Development', meta: 'Rahuri · Ahilyanagar', title: 'Twin Bungalows Scheme', client: 'Joint Private Estates', img: 'twin-bungalow-rahuri-1.webp', alt: 'Twin Bungalows at Rahuri',
-      sector: 'RESIDENTIAL SCHEME', mtitle: 'Twin Bungalows Scheme', location: 'Rahuri, Ahilyanagar', mclient: 'Private Joint Families', scope: 'Architectural Masterplan, Twin Symmetry 3D Elevation, BPMS Sanction',
-      desc: 'Harmonious twin bungalow residences sharing a synchronized contemporary facade language while preserving individual structural privacy and independent RCC frames.' },
+      sector: 'INDUSTRIAL & COMMUNITY', mtitle: 'Sai Shaneshwar Mangal Karyalay & Cotton Seed Oil Plant', location: 'Jatap, Ahilyanagar', mclient: 'Sai Shaneshwar Farmer Producer Company', scope: 'Factory steel-frame (PEB) & concrete design, heavy machine foundation, community hall',
+      desc: 'A large two-in-one landmark: a cotton seed oil factory and a big open-span Mangal Karyalay marriage hall that holds thousands of guests.' },
+    { id: 'hotel-ganraj', cat: 'commercial', badge: 'Hotel Design', meta: 'Highway Corridor · Maharashtra', title: 'Hotel Ganraj Highway Landmark', client: 'Ganraj Hotels', img: 'hotel-ganraj.webp', alt: 'Hotel Ganraj Highway Architecture',
+      sector: 'HOTEL DESIGN', mtitle: 'Hotel Ganraj Highway Landmark', location: 'State Highway Corridor, Maharashtra', mclient: 'Ganraj Hotel Group', scope: '3D Front View, Site Layout Plan, Full Construction',
+      desc: 'A highway hotel with long LED light strips, open-sky rooftop dining, a big banquet hall and easy vehicle movement.' },
+    { id: 'aasif-bhai', cat: 'residential', badge: 'Luxury Home', meta: 'Islampura · Shrirampur', title: 'Aasif Bhai Luxury Home', client: 'Client: Mr. Aasif Bhai', img: 'aasif-bhai-bungalow.webp', alt: 'Aasif Bhai Luxury Residence, Islampura',
+      sector: 'LUXURY HOME', mtitle: 'Aasif Bhai Home', location: 'Islampura, Shrirampur', mclient: 'Mr. Aasif Bhai', scope: '3D Front View, Concrete Structure Design, Full Interior & Civil Work',
+      desc: 'A custom two-storey luxury home with floating balconies, vertical wood-look slats, soft outer lighting and garden terraces.' },
+    { id: 'gadhe-residence', cat: 'residential', badge: 'Modern Duplex Home', meta: 'Shrirampur · Ahilyanagar', title: 'Gadhe Duplex Home', client: 'Client: Gadhe Family', img: 'gadhe-residence-day.webp', alt: 'Gadhe Residence Architectural Duplex',
+      sector: 'MODERN DUPLEX HOME', mtitle: 'Gadhe Home (Day & Evening Look)', location: 'Shrirampur, Ahilyanagar', mclient: 'Mr. Gadhe & Family', scope: '3D Front View (Day/Night), BPMS Drawing, Concrete Detailing',
+      desc: 'A striking modern duplex bungalow with textured stone walls, built-in planters and special evening lighting that looks beautiful all day.' },
+    { id: 'mangalmurti-residency', cat: 'commercial residential', badge: 'Residential & Commercial Tower', meta: 'Shrirampur · BPMS Approval', title: 'Proposed Mangalmurti Residency', client: 'Mangalmurti Group', img: 'mangalmurti-residency.webp', alt: 'Proposed Mangalmurti Residency Tower',
+      sector: 'RESIDENTIAL & COMMERCIAL TOWER', mtitle: 'Proposed Mangalmurti Residency', location: 'Shrirampur, Dist-Ahilyanagar', mclient: 'Mangalmurti Developers', scope: 'BPMS City Approval, Concrete Structure Design, Real-Looking 3D Exterior',
+      desc: 'A landmark apartment building with showrooms on the ground floor and family flats above. Designed to be earthquake-safe (IS-1893) with a front that stays cool.' },
+    { id: 'dafal-bungalow', cat: 'residential', badge: 'Custom Bungalow Design', meta: 'Shrirampur · Maharashtra', title: 'Dafal Saheb Residence', client: 'Client: Mr. Dafal', img: 'dafal-bungalow.webp', alt: 'Dafal Saheb Residence',
+      sector: 'CUSTOM BUNGALOW DESIGN', mtitle: 'Dafal Saheb Residence', location: 'Shrirampur, Maharashtra', mclient: 'Mr. Dafal', scope: 'Front View Design, Concrete Frame, Site Supervision',
+      desc: 'A grand private villa that mixes classic, balanced looks with clean modern lines, big floor-to-ceiling windows and a very sturdy structure.' },
+    { id: 'twin-bungalows', cat: 'residential', badge: 'Twin Villa Project', meta: 'Rahuri · Ahilyanagar', title: 'Twin Bungalows Scheme', client: 'Joint Private Homes', img: 'twin-bungalow-rahuri-1.webp', alt: 'Twin Bungalows at Rahuri',
+      sector: 'RESIDENTIAL SCHEME', mtitle: 'Twin Bungalows Scheme', location: 'Rahuri, Ahilyanagar', mclient: 'Private Joint Families', scope: 'Master Plan, Matching 3D Front View, BPMS Approval',
+      desc: 'Two matching bungalows with one modern front design, but each with its own privacy and its own concrete frame.' },
     { id: 'row-house', cat: 'residential', badge: 'Row Housing Scheme', meta: 'Shrirampur · BPMS Approved', title: 'Sonawane Row Bungalow Scheme', client: 'Sonawane Developers', img: 'row-house-scheme.webp', alt: 'Sonawane Row House Development',
-      sector: 'HOUSING DEVELOPMENT', mtitle: 'Sonawane Modern Row Bungalow Scheme', location: 'Shrirampur, Ahilyanagar', mclient: 'Sonawane Developers', scope: 'Master Layout Plan, Row House Elevation, RC Structural Design',
-      desc: 'A high-efficiency row housing scheme maximizing natural sunlight and cross-ventilation across individual modular plots, certified with MahaBPMS layout sanctioning.' },
+      sector: 'HOUSING PROJECT', mtitle: 'Sonawane Modern Row Bungalow Scheme', location: 'Shrirampur, Ahilyanagar', mclient: 'Sonawane Developers', scope: 'Layout Plan, Row House Front View, Concrete Structure Design',
+      desc: 'A row house project made for plenty of sunlight and fresh air in every plot, with the layout approved on MahaBPMS.' },
     { id: 'rukhmini-narayan', cat: 'residential commercial', badge: 'Multi-Storey Residential', meta: 'Shrirampur · RC Design', title: 'Rukhmini Narayan Apartment', client: 'Housing Society', img: 'rukhmini-narayan-apartment.webp', alt: 'Rukhmini Narayan Apartment',
-      sector: 'MULTI-STOREY APARTMENTS', mtitle: 'Rukhmini Narayan Apartment', location: 'Shrirampur, Maharashtra', mclient: 'Private Housing Society', scope: 'RC Structural Design, Town Planning Scrutiny, Construction Governance',
-      desc: 'Contemporary multi-storey residential complex with dedicated basement stilt parking, earthquake-resistant framed columns, and cross-ventilated vastu-compliant floor designs.' },
-    { id: 'jama-masjid', cat: 'religious', badge: 'Sacred Architecture', meta: 'Deolali Pravara · Sacred Minarets', title: 'Jama Masjid Landmark', client: 'Community Trust', img: 'jama-masjid-deolali.webp', alt: 'Jama Masjid Deolali Pravara',
-      sector: 'RELIGIOUS & COMMUNITY ARCHITECTURE', mtitle: 'Jama Masjid Architectural Landmark', location: 'Deolali Pravara, Ahilyanagar', mclient: 'Masjid Trust & Community', scope: 'Sacred Architecture, Minaret Structural Engineering, 3D Elevation',
-      desc: 'Spiritual architecture featuring grand towering minarets, intricate Islamic arch geometry, and large-span prayer hall RCC framing engineered with acoustic and natural cooling principles.' },
-    { id: 'hotel-kranti', cat: 'commercial', badge: 'Hospitality Center', meta: 'Ahilyanagar District', title: 'Hotel Kranti Commercial Hub', client: 'Kranti Hospitality', img: 'hotel-kranti.webp', alt: 'Hotel Kranti Hospitality Center',
-      sector: 'HOSPITALITY & COMMERCIAL', mtitle: 'Hotel Kranti Commercial Hub', location: 'Ahilyanagar District', mclient: 'Kranti Enterprise', scope: '3D Elevation, Facade Modernization, RC Structural Engineering',
-      desc: 'Full-scale architectural facade intervention and structural rehabilitation, integrating contemporary exterior finishes with robust commercial food and lodging facilities.' },
-    { id: 'farmer-shopping', cat: 'industrial commercial', badge: 'Agro-Commercial & PEB', meta: 'Rural Cluster · Steel Design', title: 'Farmer Producer Shopping Center', client: 'Farmer Producer Co.', img: 'farmer-producer-shopping.webp', alt: 'GI Sheet Shopping Center for Farmer Producer Co.',
-      sector: 'AGRI-COMMERCIAL & INDUSTRIAL', mtitle: 'GI Sheet Shopping Center & Agro Logistics', location: 'Ahilyanagar Rural Cluster', mclient: 'Farmer Producer Company', scope: 'Structural Steel Framing, Cost Optimization, Town Planning Approval',
-      desc: 'Engineered galvanized iron industrial retail shopping hub serving rural agricultural trade, with heavy-load flooring and rapid-assembly modular steel roof trusses.' },
-    { id: 'pilghar-villa', cat: 'residential', badge: 'Sustainable Villa', meta: 'Shrirampur Region · Green Arch', title: 'Pilghar Executive Villa', client: 'Private Client', img: 'pilghar-luxury-bungalow.webp', alt: 'Pilghar Luxury Villa',
-      sector: 'LUXURY RESIDENTIAL ESTATE', mtitle: 'Pilghar Executive Bungalow', location: 'Shrirampur Region', mclient: 'Private Client', scope: '3D Elevation, RC Design, Sustainable Eco-Sensitive Architecture',
-      desc: 'Expansive private residence integrating sustainable passive solar shading, large landscaped verandahs, rainwater harvesting systems, and premium monolithic plaster finishes.' },
-    { id: 'kalhapure-residence', cat: 'residential', badge: 'Modern Residence', meta: 'Shrirampur · Facade Design', title: 'Kalhapure Modern Residence', client: 'Kalhapure Family', img: 'kalhapure-bungalow.webp', alt: 'Kalhapure Bungalow Elevation',
-      sector: 'PRIVATE RESIDENCE', mtitle: 'Kalhapure Bungalow', location: 'Shrirampur, Maharashtra', mclient: 'Kalhapure Family', scope: '3D Elevation, Structural Detailing, Project Execution',
-      desc: 'Clean-lined modern home with geometric box-cantilever profiles, recessed ambient warm lighting, and thermal-break brick masonry construction.' },
-    { id: 'daulatpur-bungalow', cat: 'residential', badge: 'Residential Elevation', meta: 'Daulatpur · Maharashtra', title: 'Daulatpur Bungalow Design', client: 'Client: Mr. Khan Kalim', img: 'daulatpur-bungalow.webp', alt: 'Daulatpur Bungalow Elevation',
-      sector: 'REGIONAL RESIDENCE', mtitle: 'Daulatpur Bungalow Design', location: 'Daulatpur, Maharashtra', mclient: 'Mr. Khan Kalim', scope: '3D Elevation & Perspective Study, RC Structural Detailing',
-      desc: 'Custom suburban residential elevation engineered with clean vertical lines, weather-resistant exterior textures, and expansive terrace pergola pergolas.' },
-    { id: 'anayah-landmark', cat: 'residential', badge: 'Architectural Signature', meta: 'Timeless Intervention', title: 'Anayah Signature Villa', client: 'Private Commission', img: 'anayah-landmark-elevation.webp', alt: 'Anayah Signature Architectural Villa',
-      sector: 'ARCHITECTURAL CONCEPT & VILLA', mtitle: 'Anayah Signature Modern Residence', location: 'Shrirampur, Ahilyanagar', mclient: 'Private Commission', scope: 'Complete Turnkey Architectural Design & Engineering',
-      desc: 'Signature architectural intervention illustrating the firm’s core philosophy: functional clarity, timeless structural integrity, and distinct visual elegance.' }
+      sector: 'MULTI-STOREY APARTMENTS', mtitle: 'Rukhmini Narayan Apartment', location: 'Shrirampur, Maharashtra', mclient: 'Private Housing Society', scope: 'Concrete Structure Design, Town Planning Check, Construction Management',
+      desc: 'A modern multi-storey apartment building with basement parking, earthquake-safe columns and airy, Vastu-friendly flats.' },
+    { id: 'jama-masjid', cat: 'religious', badge: 'Religious Building', meta: 'Deolali Pravara · Tall Minarets', title: 'Jama Masjid Landmark', client: 'Community Trust', img: 'jama-masjid-deolali.webp', alt: 'Jama Masjid Deolali Pravara',
+      sector: 'RELIGIOUS & COMMUNITY BUILDING', mtitle: 'Jama Masjid Landmark', location: 'Deolali Pravara, Ahilyanagar', mclient: 'Masjid Trust & Community', scope: 'Religious Building Design, Minaret Structure Design, 3D Front View',
+      desc: 'A holy building with tall minarets, fine Islamic arch designs and a wide prayer hall frame that stays cool and has good sound.' },
+    { id: 'hotel-kranti', cat: 'commercial', badge: 'Hotel & Food Centre', meta: 'Ahilyanagar District', title: 'Hotel Kranti Commercial Hub', client: 'Kranti Hospitality', img: 'hotel-kranti.webp', alt: 'Hotel Kranti Hospitality Center',
+      sector: 'HOTEL & BUSINESS', mtitle: 'Hotel Kranti Commercial Hub', location: 'Ahilyanagar District', mclient: 'Kranti Enterprise', scope: '3D Front View, New Front Look, Concrete Structure Design',
+      desc: 'A full new front design and strengthening of the building, mixing a modern outer finish with strong food and stay facilities.' },
+    { id: 'farmer-shopping', cat: 'industrial commercial', badge: 'Farm Trade & Steel Frame (PEB)', meta: 'Village Area · Steel Design', title: 'Farmer Producer Shopping Center', client: 'Farmer Producer Co.', img: 'farmer-producer-shopping.webp', alt: 'GI Sheet Shopping Center for Farmer Producer Co.',
+      sector: 'FARM TRADE & INDUSTRIAL', mtitle: 'GI Sheet Shopping Centre & Farm Goods Storage', location: 'Ahilyanagar Rural Cluster', mclient: 'Farmer Producer Company', scope: 'Steel Frame Design, Cost Saving, Town Planning Approval',
+      desc: 'A strong GI sheet shopping centre for village farm trade, with heavy-duty floors and quick-to-fit steel roof frames.' },
+    { id: 'pilghar-villa', cat: 'residential', badge: 'Eco-Friendly Villa', meta: 'Shrirampur Area · Green Building', title: 'Pilghar Villa', client: 'Private Client', img: 'pilghar-luxury-bungalow.webp', alt: 'Pilghar Luxury Villa',
+      sector: 'LUXURY HOME', mtitle: 'Pilghar Bungalow', location: 'Shrirampur Region', mclient: 'Private Client', scope: '3D Front View, Concrete Design, Eco-Friendly Building Design',
+      desc: 'A large private home with sun-shading, wide garden verandahs, rainwater saving and a smooth, rich plaster finish.' },
+    { id: 'kalhapure-residence', cat: 'residential', badge: 'Modern Home', meta: 'Shrirampur · Front Design', title: 'Kalhapure Modern Home', client: 'Kalhapure Family', img: 'kalhapure-bungalow.webp', alt: 'Kalhapure Bungalow Elevation',
+      sector: 'PRIVATE HOME', mtitle: 'Kalhapure Bungalow', location: 'Shrirampur, Maharashtra', mclient: 'Kalhapure Family', scope: '3D Front View, Structure Details, Construction',
+      desc: 'A clean modern home with box-shaped overhangs, soft warm lights and heat-saving brick walls.' },
+    { id: 'daulatpur-bungalow', cat: 'residential', badge: 'Home Front Design', meta: 'Daulatpur · Maharashtra', title: 'Daulatpur Bungalow Design', client: 'Client: Mr. Khan Kalim', img: 'daulatpur-bungalow.webp', alt: 'Daulatpur Bungalow Elevation',
+      sector: 'LOCAL HOME', mtitle: 'Daulatpur Bungalow Design', location: 'Daulatpur, Maharashtra', mclient: 'Mr. Khan Kalim', scope: '3D Front View & Perspective, Concrete Structure Details',
+      desc: 'A custom home front with clean straight lines, weather-proof outer finish and a wide terrace pergola.' },
+    { id: 'anayah-landmark', cat: 'residential', badge: 'Our Signature Design', meta: 'Timeless Design', title: 'Anayah Signature Villa', client: 'Private Commission', img: 'anayah-landmark-elevation.webp', alt: 'Anayah Signature Architectural Villa',
+      sector: 'DESIGN CONCEPT & VILLA', mtitle: 'Anayah Signature Modern Home', location: 'Shrirampur, Ahilyanagar', mclient: 'Private Commission', scope: 'Complete Design, Engineering & Construction',
+      desc: 'Our signature design that shows what we believe in: simple use, lasting strength and clear beauty.' }
   ];
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -318,20 +318,20 @@
         $('#form-phone').focus(); return;
       }
       var text = encodeURIComponent(
-        '*Private Viewing & Architectural Briefing Request — Anayah Associates*\n\n' +
+        '*Enquiry from Website — Anayah Associates*\n\n' +
         '• *Client Name:* ' + d.name + '\n• *Phone Number:* ' + d.phone + '\n' +
-        '• *Preferred Viewing Date:* ' + (d.date || 'Earliest Available') + '\n' +
-        '• *Project Interest:* ' + d.type + '\n• *Services Needed:* ' + (d.services || d.type) + '\n' +
+        '• *Preferred Meeting Date:* ' + (d.date || 'Earliest Available') + '\n' +
+        '• *Project Type:* ' + d.type + '\n• *Services Needed:* ' + (d.services || d.type) + '\n' +
         '• *Site Location / Plot:* ' + (d.location || 'Shrirampur region') + '\n' +
-        '• *Architectural Brief:* ' + (d.message || 'I would like to request a private viewing of completed residences and consultation with Er. Sameer Shaikh.'));
+        '• *Message:* ' + (d.message || 'I would like to talk to Er. Sameer Shaikh about my project.'));
       window.open('https://wa.me/918788731650?text=' + text, '_blank', 'noopener,noreferrer');
-      toast('Opening WhatsApp with your VIP viewing request...');
+      toast('Opening WhatsApp with your enquiry...');
     });
     $('#form-email-btn').addEventListener('click', function () {
       var d = formData();
-      var body = encodeURIComponent('Name: ' + d.name + '\nPhone: ' + d.phone + '\nPreferred Date: ' + (d.date || 'Earliest') +
-        '\nServices: ' + (d.services || d.type) + '\nProject Type: ' + d.type + '\nLocation: ' + d.location + '\n\nProject Requirements:\n' + d.message);
-      window.location.href = 'mailto:sameiirshaikh@gmail.com?subject=Private%20Viewing%20Reservation%20%E2%80%94%20Anayah%20Website&body=' + body;
+      var body = encodeURIComponent('Name: ' + d.name + '\nPhone: ' + d.phone + '\nPreferred Meeting Date: ' + (d.date || 'Earliest') +
+        '\nServices: ' + (d.services || d.type) + '\nProject Type: ' + d.type + '\nLocation: ' + d.location + '\n\nMessage:\n' + d.message);
+      window.location.href = 'mailto:sameiirshaikh@gmail.com?subject=Enquiry%20from%20Anayah%20Website&body=' + body;
     });
   }
 
@@ -346,6 +346,27 @@
       mc.innerHTML = ''; mc.appendChild(f);
     });
   }
+
+  /* ---------- Service enquiry boxes ---------- */
+  $$('.inq').forEach(function (f) {
+    var service = f.dataset.service;
+    function build() {
+      var msg = ($('textarea', f).value || '').trim();
+      var inputs = $$('input', f), name = (inputs[0].value || '').trim(), phone = (inputs[1].value || '').trim();
+      var extra = '';
+      if (name) extra += '\nName: ' + name;
+      if (phone) extra += '\nPhone: ' + phone;
+      return 'Service: ' + service + '\n\n' + msg + extra;
+    }
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.open('https://wa.me/918788731650?text=' + encodeURIComponent(build()), '_blank', 'noopener,noreferrer');
+      toast('Opening WhatsApp with your message...');
+    });
+    $('.inq-email', f).addEventListener('click', function () {
+      window.location.href = 'mailto:sameiirshaikh@gmail.com?subject=' + encodeURIComponent('Enquiry: ' + service) + '&body=' + encodeURIComponent(build());
+    });
+  });
 
   /* ---------- Back to top ---------- */
   var top = $('#back-to-top');
@@ -378,6 +399,8 @@
     }
     function startCapture() {
       if (capturing || ready) return;
+      // skip the first moment of the clip (it fades in from plain white)
+      try { if (video.currentTime < 0.6) video.currentTime = 0.6; } catch (e) {}
       capturing = true; schedule();
       var p = video.play(); if (p && p.catch) p.catch(function () {});
     }

@@ -5,8 +5,10 @@
   --muted: rgba(25, 25, 25, .7);
   --faint: rgba(25, 25, 25, .5);
   --line: #e5e7eb;
-  --soft: #F4F3F3;
-  --soft-2: #eaeaea;
+  --soft: #F5F3EE;
+  --soft-2: #ECE9E1;
+  --accent: #9a7740;
+  --accent-soft: rgba(154, 119, 64, .12);
   --bg: #ffffff;
   --ease: cubic-bezier(.22, 1, .36, 1);
   --serif: 'P22 Mackinac W01 Book', Georgia, serif;
@@ -380,3 +382,81 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .hs-pop { width: 220px; }
   .hint { display: none; }
 }
+
+/* =====================================================
+   Colour grading + finishing touches
+   Palette: white paper / warm stone / ink black / brass (from the gold logo)
+   ===================================================== */
+::selection { background: var(--accent); color: #fff; }
+html { scrollbar-color: var(--accent) var(--soft); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--soft); }
+::-webkit-scrollbar-thumb { background: #cdbd9f; border-radius: 10px; border: 2px solid var(--soft); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* hero background: clearer lines, lighter glass panel so the drawing shows */
+.bgv-media { filter: contrast(1.28) saturate(1.2) brightness(.98); }
+.hero-panel { background: rgba(255,255,255,.72); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); border-color: rgba(25,25,25,.1); box-shadow: 0 -10px 40px rgba(25,25,25,.06); }
+.hp-row { background: rgba(245,243,238,.85); }
+.hp-row:hover { background: #fff; }
+.hp-row:hover i { color: var(--accent); }
+.hp-row:hover svg { color: var(--accent); }
+.sub { color: rgba(25,25,25,.78); }
+
+/* brass accents */
+.label, .micro { color: var(--accent); }
+.sec .label, .sec .num { color: var(--accent); }
+.label::before { content: ""; display: inline-block; width: 26px; height: 1px; background: var(--accent); vertical-align: middle; margin-right: 12px; }
+.micro { font-weight: 600; }
+.cnum em { color: var(--accent); }
+.mins { color: var(--accent); }
+.progress { background: linear-gradient(90deg, var(--accent), #d2b277); height: 3px; }
+.sec::before { background: linear-gradient(90deg, var(--accent), transparent 70%); }
+.hs-dot { background: var(--accent); box-shadow: 0 0 0 6px rgba(255,255,255,.6), 0 6px 18px rgba(0,0,0,.25); }
+.pulse { background: var(--accent); }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(154,119,64,.45); } 100% { box-shadow: 0 0 0 14px rgba(154,119,64,0); } }
+.vantage-item:hover, .vantage-item.is-active { border-bottom-color: var(--accent); }
+.vantage-item i { color: var(--accent); }
+.founder blockquote { border-left-color: var(--accent); }
+.creds li { background: var(--accent-soft); color: #5e4724; }
+.map-bar i { background: var(--accent); }
+.service li::before { color: var(--accent); }
+.pclient em { color: var(--accent); }
+.btn { box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 6px 18px rgba(25,25,25,.16); transition: background-color .2s, transform .2s var(--ease), box-shadow .2s; }
+.btn:hover { background: #2b2b2b; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(25,25,25,.22); }
+.ghost:hover, .ghost-btn:hover { border-bottom-color: var(--accent); color: var(--accent); }
+.ghost-btn:hover { border-color: var(--accent); background: transparent; }
+.filter.is-active { background: var(--ink); border-color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+.chip input:checked + span { background: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-bottom-color: var(--accent); }
+.links a:hover { color: var(--accent); }
+.wa-float { box-shadow: 0 10px 30px rgba(25,25,25,.28), inset 0 -2px 0 var(--accent); }
+
+/* tone + depth: soft-white sections, photo colour grade, gentle shadows */
+.sec { background-image: linear-gradient(180deg, rgba(154,119,64,.035), transparent 220px); }
+#the-build, #neighborhood, #process, #why-anayah, #services { background-image: none; }
+.vantage-frame img, .build-visual img, .split-img img, .founder-photo img, .amen-visual > img, .service-img img, .pimg img, .modal-img img { filter: contrast(1.05) saturate(1.06); }
+.vantage-frame, .split-img img, .founder-photo img, .amen-visual > img, .pcard .pimg, .map { box-shadow: 0 22px 50px -24px rgba(25,25,25,.35); }
+.pcard:hover .pimg { box-shadow: 0 28px 60px -22px rgba(25,25,25,.45); }
+.footer { background: #14161a; background-image: radial-gradient(900px 300px at 85% 0, rgba(154,119,64,.14), transparent 70%); }
+.footer-nav h4, .footer .credit { color: rgba(222,198,150,.7); }
+.footer-nav a:hover { color: #e3c98f; }
+.toast { box-shadow: inset 0 -2px 0 var(--accent); }
+
+/* service enquiry block */
+.service { border-radius: 2px; }
+.service:hover { box-shadow: 0 24px 60px -24px rgba(25,25,25,.28); transform: translateY(-3px); }
+.service { transition: box-shadow .4s, transform .5s var(--ease); }
+.inq { margin: 8px 28px 0; padding: 22px 0 0; border-top: 1px solid var(--line); margin-top: 8px; }
+.service > .inq { margin-left: 28px; margin-right: 28px; margin-top: auto; }
+.inq-title { margin: 0 0 12px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent) !important; font-weight: 600; }
+.inq textarea { width: 100%; resize: vertical; min-height: 118px; background: var(--soft); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; font: inherit; font-size: 14px; line-height: 1.55; color: var(--ink); outline: none; transition: border-color .2s, background .2s; }
+.inq textarea:focus { border-color: var(--accent); background: #fff; }
+.inq-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.inq input { width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; font: inherit; font-size: 14px; color: var(--ink); outline: none; transition: border-color .2s; }
+.inq input:focus { border-color: var(--accent); }
+.inq-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; align-items: center; }
+.inq-actions .btn { padding: 11px 18px; }
+.inq-actions .ghost-btn { padding: 10px 16px; font-size: 13px; }
+@media (max-width: 640px) { .inq-row { grid-template-columns: 1fr; } }
