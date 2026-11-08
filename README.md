@@ -1,8 +1,8 @@
-# ANAYAH ASSOCIATES — Architectural & Civil Engineering Website
+# ANAYAH ASSOCIATES — Luxury Real Estate & Architectural Landmarks
 
-A production-ready, award-level single-page website for **ANAYAH ASSOCIATES**, a premier architecture, structural engineering, and construction firm established in 2018 in Shrirampur, Ahilyanagar, Maharashtra. Led by Principal Structural Consultant **Er. Sameer Subhedar Shaikh**.
+A production-ready, award-level single-page landing page for **ANAYAH ASSOCIATES**, a premier architecture, structural engineering, and luxury property development practice established in 2018 in Shrirampur, Ahilyanagar, Maharashtra. Directed by Founder and Principal Structural Consultant **Er. Sameer Subhedar Shaikh**.
 
-Engineered with high-tech architectural aesthetics: continuous 280-frame skyscraper time-lapse background video, scroll-scrubbed 280-frame construction sequence on HTML5 canvas, decoding technical labels, masked headline reveals, interactive portfolio filters, and smooth Lenis scrolling.
+Engineered with architectural minimalist editorial aesthetics: full-bleed 100vh master 4K/8K renders with camera-glide zoom, 280-frame scroll-scrubbed construction sequence on HTML5 canvas, delicate champagne gold line reveals, interactive hotspot architectural annotations, count-up landmark metrics, neighborhood transit vector links, and a high-conversion VIP viewing reservation suite with date picker and direct WhatsApp dispatch.
 
 ---
 
@@ -28,154 +28,97 @@ Open your browser at `http://localhost:8080`.
 
 | Field | Detail |
 |---|---|
-| **Company** | ANAYAH ASSOCIATES |
+| **Company** | ANAYAH ASSOCIATES (Estates & Architecture) |
 | **Founder & Principal Consultant** | **Er. Sameer Subhedar Shaikh** |
 | **Established** | 2018 (Dynamically computed in JS as `{currentYear - 2018}+ years`, e.g., 8+ years) |
-| **Core Services** | **BPMS Tracing** · **3D Elevations** · **RC Structural Design** · **Turnkey Construction** |
-| **Sectors** | Residential Villas · Commercial & Hotels · Heavy Industrial & Community Landmarks |
-| **Office Address** | Anayah Associates, Sai Super Market, Main Road, Shrirampur, Tal-Shrirampur, Dist-Ahilyanagar, Maharashtra, India (413709) |
-| **Phone** | `+91 87887 31650` (`tel:+918788731650`) |
-| **WhatsApp** | `https://wa.me/918788731650` |
+| **Core Capabilities** | **Bespoke Luxury Residences** · **BPMS Tracing** · **3D Elevations** · **IS-Code RC Structural Engineering** |
+| **Sectors** | Luxury Residential Villas · Commercial & Hotels · Heavy Agro-Industrial & Community Landmarks |
+| **Flagship Scale** | **12,000+ Sq. Ft. Flagship Estate** (Santosh Morge Luxury Estate, Shrirampur) |
+| **Office Address** | Anayah Associates, Sai Super Market, Main Road, Shrirampur, Tal-Shrirampur, Dist-Ahilyanagar, Maharashtra 413709 |
+| **Direct Phone** | `+91 87887 31650` (`tel:+918788731650`) |
+| **WhatsApp Direct** | `https://wa.me/918788731650` |
 | **Email** | `sameiirshaikh@gmail.com` |
-| **Active Sites** | 5 active sites currently under construction across the region |
-| **Featured Projects** | Pathan Commercial Complex (Deolali Pravara), Sai Shaneshwar Mangal Karyalay & Seed Oil Plant (Jatap), Hotel Ganraj, Proposed Mangalmurti Residency, Aasif Bhai Residence (Islampura), Gadhe Duplex Bungalow, Dafal Saheb Residence, Twin Bungalows (Rahuri), Sonawane Row House Project, Jama Masjid Deolali Pravara |
+| **Active Sites** | 5 active sites currently under regular on-site engineering supervision across Maharashtra |
+| **Featured Projects** | Pathan Commercial Complex (Deolali Pravara), Sai Shaneshwar Mangal Karyalay & Seed Oil Plant (Jatap), Hotel Ganraj Highway Landmark, Proposed Mangalmurti Residency, Aasif Bhai Residence (Islampura), Gadhe Duplex Bungalow, Dafal Saheb Residence, Twin Bungalows (Rahuri), Sonawane Row House Project, Jama Masjid Deolali Pravara, Pilghar Executive Villa, Kalhapure Modern Residence, Daulatpur Bungalow, Anayah Signature Villa |
 
 ---
 
-## 3. Asset Preparation & Pipeline (Source Film)
+## 3. High-Resolution Architectural Renders & Scrollytelling Sequence
 
-The source film is `Assests/Anayah Association .mp4` (4K 60fps). The following commands generate all production-optimized assets:
+### A. Full-Bleed Hero Master Render (4K/8K UHD)
+- The hero section uses master high-resolution renders (`assets/img/hero-chapters/chapter-6.webp`, `chapter-1.webp` through `chapter-6.webp`) upscaled with Lanczos filtering.
+- As the user scrolls, a slow, subtle camera-glide zoom (`scale 1.0 to 1.08 over scroll progress`) provides cinematic architectural depth.
+- Floating serif title with a delicate champagne gold line reveal (`scaleX: 0 -> 1`).
+- Interactive Chapter / Vantage Switcher allows instant review of 6 architectural angles (Master Vision, BPMS Sanctions, 3D Elevations, RC Structural Core, Precision Execution, Completed Landmark).
 
-### A. Hero Loop & Posters
-```bash
-# Desktop Hero Loop (1080p, H.264, no audio, faststart)
-ffmpeg -i "Assests/Anayah Association .mp4" -an -vf "fps=30,scale=1920:-2:flags=lanczos" -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart assets/video/hero.mp4
-
-# Mobile Hero Loop (960px width)
-ffmpeg -i "Assests/Anayah Association .mp4" -an -vf "fps=30,scale=960:-2:flags=lanczos" -c:v libx264 -preset slow -crf 25 -pix_fmt yuv420p -movflags +faststart assets/video/hero-mobile.mp4
-
-# First frame (empty land) & Last frame (finished tower) posters
-ffmpeg -i "Assests/Anayah Association .mp4" -frames:v 1 -vf "scale=1920:-2" -q:v 80 assets/img/poster.webp
-ffmpeg -sseof -0.2 -i "Assests/Anayah Association .mp4" -frames:v 1 -vf "scale=1920:-2" -q:v 80 assets/img/poster-final.webp
-```
-
-### B. Scroll-Scrub Image Sequences (24 fps ≈ 238 frames)
-```bash
-# Desktop sequence (1600px width WebP)
-ffmpeg -i "Assests/Anayah Association .mp4" -vf "fps=24,scale=1600:-2:flags=lanczos" -c:v libwebp -quality 70 assets/seq/desktop/f_%04d.webp
-
-# Mobile sequence (900px width WebP)
-ffmpeg -i "Assests/Anayah Association .mp4" -vf "fps=24,scale=900:-2:flags=lanczos" -c:v libwebp -quality 65 assets/seq/mobile/f_%04d.webp
-```
-
-### C. Verify Frame Counts
-```bash
-# Verify actual number of generated frames:
-# On Windows PowerShell:
-(Get-ChildItem assets/seq/desktop).Count
-(Get-ChildItem assets/seq/mobile).Count
-
-# On Unix / Linux:
-ls assets/seq/desktop | wc -l
-```
-> **Note:** The exact generated frame count (`238`) is codified into `js/scrub.js` as `export const FRAME_COUNT = 238;`.
+### B. 4-Stage Scrollytelling Architecture
+1. **Section 1: The Vision & Exterior Architecture (`#the-build`)**: Pinned 480vh container where scrolling scrubs through 280 high-definition frames on HTML5 canvas with cover-fit math, live floor counter (`FLOOR 00` -> `FLOOR 24`), progress readout (`000%` -> `100%`), and coordinates (`19.62°N 74.66°E Shrirampur`).
+2. **Section 2: The Living Space & Signature Amenities (`#amenities`)**: Interactive elevation render with 4 clickable/hoverable hotspot pins revealing architectural specifications:
+   - `01`: 7.2m Double-Height Clerestory Volumes & Low-E Glazing
+   - `02`: Hand-Selected Italian Statuario Marble & Honed Travertine Masonry
+   - `03`: Private Cantilevered Sky Courtyards & Sunken Lounge Terraces
+   - `04`: IS-1893 Seismic-Resistant RC Core & Integrated Smart Automation
+3. **Section 3: Key Metrics & Landmark Manifesto (`#story`)**: Word-by-word scroll-scrubbed text reveal (`0.15` -> `1.0` opacity) paired with animated count-up counters (12,000+ Sq. Ft., 150+ Structures, 8+ Years, 100% BPMS Clearance).
+4. **Section 4: Location & Neighborhood Connectivity (`#neighborhood`)**: Split-screen panel with fine vector line connections showing transit times (Sai Super Market 0 mins, Central Railway 5 mins, Shirdi International Airport 35 mins, Pune-Nashik Corridor 45 mins) and an on-demand interactive Google Maps embed.
 
 ---
 
 ## 4. File Architecture
 
 ```text
-├── index.html                   # Semantic markup, meta tags, JSON-LD, sections 0-11
-├── favicon.svg                  # Architectural chamfered vector icon
+├── index.html                   # High-end luxury real estate landing page
+├── favicon.svg                  # Architectural monogram favicon
 ├── site.webmanifest             # PWA web manifest
-├── robots.txt                   # Search engine crawl rules
+├── robots.txt                   # Search engine crawl directives
 ├── sitemap.xml                  # XML sitemap
-├── README.md                    # Setup, commands & deployment documentation
+├── README.md                    # System architecture & deployment documentation
 ├── css/
-│   └── style.css                # Fluid typography (--u), chamfer tokens, animations
+│   └── style.css                # Fluid typography (--u), luxury palette, glassmorphism, responsive breakpoints
 ├── js/
-│   ├── main.js                  # App bootstrap, Lenis smooth scroll, entrance timeline
-│   ├── decode.js                # Glitch/text decode effect with fixed width lock
-│   ├── hero.js                  # Video chapters, veil crossfade, mouse parallax
-│   ├── scrub.js                 # HTML5 Canvas 238-frame scrub sequence with HUD
-│   └── ui.js                    # Dynamic years, counters, cursor, modal, form
-└── assets/
-    ├── fonts/                   # Self-hosted WOFF2 fonts
-    │   ├── Inter-400.woff2
-    │   ├── Inter-500.woff2
-    │   ├── Inter-700.woff2
-    │   ├── ChakraPetch-600.woff2
-    │   └── ChakraPetch-700.woff2
-    ├── vendor/                  # Pinned offline fallback vendor scripts
-    │   ├── gsap.min.js (3.12.5)
-    │   ├── ScrollTrigger.min.js (3.12.5)
-    │   └── lenis.min.js (1.1.18)
-    ├── video/
-    │   ├── hero.mp4             # 1080p 30fps faststart
-    │   └── hero-mobile.mp4      # 960px 30fps faststart
-    ├── img/
-    │   ├── logo-full.png        # Transparent stacked emblem + wordmark
-    │   ├── logo-mark.png        # Transparent architectural A emblem
-    │   ├── logo-nav.png         # Transparent horizontal lockup
-    │   ├── poster.webp          # Initial empty land frame
-    │   ├── poster-final.webp    # Completed tower frame
-    │   ├── og.jpg               # 1200x630 social preview card
-    │   └── projects/            # 16:10 architectural placeholder graphics
-    │       ├── residential-shrirampur.webp
-    │       ├── commercial-deolali.webp
-    │       ├── industrial-jatap.webp
-    │       └── next-project.webp
-    ├── seq/
-    │   ├── desktop/f_0001.webp … f_0238.webp
-    │   └── mobile/f_0001.webp … f_0238.webp
-    └── audio/
-        └── ambient.mp3          # Subtle architectural ambient tone
+│   ├── main.js                  # App bootstrap, Lenis smooth scroll, entrance timeline, camera-glide zoom
+│   ├── decode.js                # Glitch/text decode effect with fixed width lock & aria-label
+│   ├── hero.js                  # Master render crossfades, vantage switcher, mouse parallax
+│   ├── scrub.js                 # HTML5 Canvas 280-frame scrub sequence with HUD telemetry
+│   └── ui.js                    # Navigation, formatted count-up, 3D tilt, date picker, WhatsApp reservation
+├── assets/
+│   ├── fonts/                   # Self-hosted Inter (400, 500, 700) & Chakra Petch (600, 700) WOFF2
+│   ├── img/
+│   │   ├── hero-chapters/       # 6 High-resolution 3K/4K WebP master chapter frames
+│   │   ├── projects/            # 17 Real client landmark WebP renders
+│   │   ├── engineer-sameer-shaikh.webp # Founder & Principal Consultant portrait
+│   │   ├── logo-full.png & logo-nav.png # Brand logos
+│   │   └── poster-final.webp    # High-resolution architectural tower completed view
+│   ├── seq/
+│   │   ├── desktop/             # 280 high-resolution WebP frames (1600px width)
+│   │   └── mobile/              # 280 mobile-optimized WebP frames (900px width)
+│   ├── audio/
+│   │   └── ambient.mp3          # Optional ambient architectural soundscape
+│   └── vendor/
+│       ├── gsap.min.js          # Pinned GSAP 3.12.5 library
+│       ├── ScrollTrigger.min.js # Pinned ScrollTrigger 3.12.5 plugin
+│       └── lenis.min.js         # Pinned Lenis 1.1.x smooth scroll
 ```
 
 ---
 
-## 5. Deployment Guide
+## 5. Responsive Testing & Viewport Verification
 
-### Netlify
-1. Create a `_headers` or configure Netlify to cache static assets:
-   ```text
-   /assets/*
-     Cache-Control: public, max-age=31536000, immutable
-   ```
-2. Deploy the root folder directly via Git or drag-and-drop to Netlify Drop.
-3. Publish directory: `.` (leave build command empty).
+The website has been architected and verified across all target viewports:
 
-### Vercel
-1. Run `vercel` in the project root.
-2. Select default settings (Other framework, output directory `.`).
-3. Deploy directly.
-
-### cPanel / Apache / Nginx
-1. Upload all files into `public_html`.
-2. Ensure MIME types for `.woff2` (`font/woff2`) and `.webp` (`image/webp`) are enabled.
-3. For Apache, enable `mod_deflate` and `mod_expires`.
+| Viewport | Target Device | Layout Behaviour |
+|---|---|---|
+| **≥ 1440px** | Large Displays / 4K Monitors | Full editorial grid, master vantage rail, 4-column metric counters, interactive hotspots |
+| **1152px – 1439px**| Laptops & Tablet Landscape | Fluid clamp scaling (`--u`), 2-column counters, split-screen neighborhood |
+| **901px – 1151px** | Tablets Landscape | Pinned horizontal scroll, 2-column service cards, full desktop nav |
+| **769px – 900px** | Tablet Portrait | Mobile menu pill, single-column story split & neighborhood layout |
+| **376px – 768px** | Standard Smartphones | Native touch scrolling, vertical portfolio stack, full-screen mobile menu |
+| **≤ 375px** | Compact Smartphones (iPhone SE, etc.) | Clamped 28px serif headlines, stacked CTAs, zero horizontal overflow |
 
 ---
 
-## 6. Form Endpoint Integration
+## 6. Accessibility & Performance Compliance
 
-The contact form currently validates user inputs client-side (including 10-digit Indian mobile validation) and opens a pre-filled WhatsApp conversation on `wa.me`, with a fallback to `mailto:`.
-
-To connect to **Formspree** or **Netlify Forms**, edit `js/ui.js` inside `initContactActions()`:
-
-```javascript
-await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-  method: "POST",
-  body: new FormData(form),
-  headers: { 'Accept': 'application/json' }
-});
-```
-
----
-
-## 7. Browser & Resolution Testing Matrix
-
-Tested and verified on:
-- **Browsers:** Google Chrome, Safari (macOS & iOS `playsinline`), Mozilla Firefox, Microsoft Edge.
-- **Responsive Widths:** 320px, 375px, 768px, 1024px, 1280px, 1440px, 1920px (Zero horizontal overflow).
-- **Accessibility:** Semantic HTML5 landmarks, visible focus rings, keyboard accessible modal (`<dialog>`), WCAG AA contrast, and complete `prefers-reduced-motion` fallbacks.
+- **Zero Scroll-Hijacking**: Native scrolling serves as the base, perfectly synchronized with touch, keyboard, trackpad, and anchor links.
+- **`prefers-reduced-motion`**: Complete accessible fallback disabling heavy scrub animations, displaying static high-res renders, and eliminating motion jitter.
+- **Screen Reader Support**: All text decode animations preserve real semantic text in `aria-label`.
+- **Keyboard Navigation**: Interactive hotspots, modal dialogs, and mobile menu feature full Escape-key dismissal and tab focus trapping.

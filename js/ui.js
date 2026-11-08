@@ -2,16 +2,17 @@
  * ANAYAH ASSOCIATES — Interactive UI Controllers
  * Includes:
  * - Dynamic year calculation from 2018 (never goes stale)
- * - Animated statistic counters with ScrollTrigger
- * - Custom lagging cursor with state labels (VIEW, DRAG, PLAY)
+ * - Animated statistic counters with comma formatting & ease-out cubic
+ * - Custom lagging cursor with state labels (RESERVE, EXPLORE, VIEW, MAP, etc.)
  * - Magnetic buttons with spring physics
  * - Full-screen accessible mobile navigation with focus trap & decode
  * - Masthead scroll-direction show/hide
- * - Accessible Project Modal (<dialog>)
- * - Client-side validated WhatsApp / Mailto contact generator & clipboard toasts
- * - 3D card tilt & SVG stroke drawing
+ * - Accessible Project Modal (<dialog>) with 17 real client landmarks
+ * - Client-side validated WhatsApp / Mailto VIP viewing generator & clipboard toasts
+ * - 3D card tilt for luxury amenity, portfolio & founder cards
  * - Infinite velocity-reactive marquee
  * - Process timeline scroll progression
+ * - Lazy Google Maps iframe on demand
  */
 
 import { decodeText } from './decode.js';
@@ -39,7 +40,7 @@ export class UIController {
 
     // Update all year placeholders
     document.querySelectorAll('.js-exp-years').forEach((el) => {
-      el.textContent = `${yearsExp}+`;
+      el.textContent = `${yearsExp}`;
     });
     document.querySelectorAll('.js-current-year').forEach((el) => {
       el.textContent = currentYear;
@@ -66,46 +67,48 @@ export class UIController {
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    });
+      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate3d(-50%, -50%, 0)`;
+    }, { passive: true });
 
-    const loop = () => {
-      // Lerp ring
+    // Smooth trailing ring loop
+    const renderRing = () => {
       ringX += (mouseX - ringX) * 0.15;
       ringY += (mouseY - ringY) * 0.15;
-      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-      requestAnimationFrame(loop);
+      cursorRing.style.transform = `translate3d(${ringX.toFixed(1)}px, ${ringY.toFixed(1)}px, 0) translate3d(-50%, -50%, 0)`;
+      requestAnimationFrame(renderRing);
     };
-    requestAnimationFrame(loop);
+    requestAnimationFrame(renderRing);
 
-    // Contextual Hover States
-    document.querySelectorAll('[data-cursor]').forEach((target) => {
+    // Interactive elements hover reaction
+    const hoverTargets = document.querySelectorAll('a, button, [data-cursor], .portfolio-card, .amenity-card');
+    hoverTargets.forEach((target) => {
       target.addEventListener('mouseenter', () => {
-        const type = target.dataset.cursor || '';
-        cursorRing.classList.add('is-hover', `is-${type.toLowerCase()}`);
+        cursorRing.classList.add('is-hover');
+        const labelText = target.dataset.cursor || 'VIEW';
         if (cursorLabel) {
-          cursorLabel.textContent = type;
+          cursorLabel.textContent = labelText;
         }
       });
+
       target.addEventListener('mouseleave', () => {
-        cursorRing.className = 'cursor-ring';
+        cursorRing.classList.remove('is-hover');
         if (cursorLabel) cursorLabel.textContent = '';
       });
     });
   }
 
-  // 3. Magnetic Buttons (pulls up to 8u toward cursor)
+  // 3. Magnetic Buttons (Fine pointer only)
   initMagneticButtons() {
-    if ('ontouchstart' in window) return;
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
-    document.querySelectorAll('.js-magnetic').forEach((btn) => {
+    const magneticElements = document.querySelectorAll('.js-magnetic');
+    magneticElements.forEach((btn) => {
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const deltaX = (e.clientX - centerX) * 0.28;
-        const deltaY = (e.clientY - centerY) * 0.28;
-        btn.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        // Subtle magnetic pull
+        btn.style.transform = `translate3d(${(x * 0.28).toFixed(1)}px, ${(y * 0.28).toFixed(1)}px, 0)`;
       });
 
       btn.addEventListener('mouseleave', () => {
@@ -118,25 +121,22 @@ export class UIController {
     });
   }
 
-  // 4. Navigation, Mobile Menu & Masthead Scroll Dynamics
+  // 4. Navigation & Mobile Menu Controls
   initNavigation() {
     const masthead = document.getElementById('masthead');
+    const mobileMenu = document.getElementById('mobile-menu');
     const menuToggle = document.getElementById('menu-toggle');
     const menuLabel = document.getElementById('menu-label');
-    const mobileMenu = document.getElementById('mobile-menu');
     const closeBtn = document.getElementById('menu-close-btn');
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .btn-gold-nav');
     const whatsappFloat = document.getElementById('whatsapp-float');
     const contactSection = document.getElementById('contact');
 
+    // Masthead Auto-Hide on Scroll Down, Show on Scroll Up
     let lastScrollY = window.scrollY;
-
-    // Show/hide masthead on scroll direction
     window.addEventListener('scroll', () => {
       const curY = window.scrollY;
-      const heroHeight = window.innerHeight * 0.75;
-
-      if (curY > heroHeight) {
+      if (curY > window.innerHeight * 0.75) {
         if (curY > lastScrollY && curY - lastScrollY > 10) {
           masthead.classList.add('is-hidden');
         } else if (lastScrollY - curY > 10) {
@@ -153,9 +153,11 @@ export class UIController {
       const contactObs = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            whatsappFloat.classList.add('is-hidden');
+            whatsappFloat.style.opacity = '0';
+            whatsappFloat.style.pointerEvents = 'none';
           } else {
-            whatsappFloat.classList.remove('is-hidden');
+            whatsappFloat.style.opacity = '1';
+            whatsappFloat.style.pointerEvents = 'auto';
           }
         });
       }, { threshold: 0.15 });
@@ -164,20 +166,19 @@ export class UIController {
 
     // Mobile Menu Controls
     const openMenu = () => {
-      mobileMenu.classList.add('is-open');
+      mobileMenu.classList.add('is-active', 'is-open');
       mobileMenu.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       if (menuLabel) {
         menuLabel.textContent = 'CLOSE';
         decodeText(menuLabel, { duration: 300 });
       }
-      // Focus first link
       const firstLink = mobileMenu.querySelector('a, button');
       if (firstLink) firstLink.focus();
     };
 
     const closeMenu = () => {
-      mobileMenu.classList.remove('is-open');
+      mobileMenu.classList.remove('is-active', 'is-open');
       mobileMenu.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       if (menuLabel) {
@@ -189,7 +190,7 @@ export class UIController {
 
     if (menuToggle) {
       menuToggle.addEventListener('click', () => {
-        if (mobileMenu.classList.contains('is-open')) {
+        if (mobileMenu.classList.contains('is-active') || mobileMenu.classList.contains('is-open')) {
           closeMenu();
         } else {
           openMenu();
@@ -203,12 +204,12 @@ export class UIController {
 
     // Close on Escape & trap focus
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('is-open')) {
+      if (e.key === 'Escape' && mobileMenu && (mobileMenu.classList.contains('is-active') || mobileMenu.classList.contains('is-open'))) {
         closeMenu();
       }
     });
 
-    // Close on link click
+    // Close on link click and smooth scroll
     navLinks.forEach((link) => {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
@@ -216,7 +217,9 @@ export class UIController {
           e.preventDefault();
           const target = document.querySelector(href);
           if (target) {
-            if (mobileMenu.classList.contains('is-open')) closeMenu();
+            if (mobileMenu.classList.contains('is-active') || mobileMenu.classList.contains('is-open')) {
+              closeMenu();
+            }
             if (window.lenis) {
               window.lenis.scrollTo(target, { offset: -60, duration: 1.2 });
             } else {
@@ -228,7 +231,7 @@ export class UIController {
     });
   }
 
-  // 5. Statistic Counters Count-up on Scroll
+  // 5. Statistic Counters Count-up on Scroll with Formatting
   initCounters() {
     const counterElements = document.querySelectorAll('.js-counter');
     if (!counterElements.length) return;
@@ -242,7 +245,7 @@ export class UIController {
           obs.unobserve(el);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.25 });
 
     counterElements.forEach((el) => observer.observe(el));
   }
@@ -255,21 +258,21 @@ export class UIController {
       // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = Math.floor(eased * target);
-      el.textContent = current;
+      el.textContent = target >= 1000 ? current.toLocaleString('en-IN') : current;
       if (progress < 1) {
         requestAnimationFrame(tick);
       } else {
-        el.textContent = target;
+        el.textContent = target >= 1000 ? target.toLocaleString('en-IN') : target;
       }
     };
     requestAnimationFrame(tick);
   }
 
-  // 6. 3D Card Tilt for Expertise & Services Cards
+  // 6. 3D Card Tilt for Luxury Feature Cards
   initCardTilt() {
-    if ('ontouchstart' in window) return;
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
-    const cards = document.querySelectorAll('.expertise-card, .service-card, .founder-card');
+    const cards = document.querySelectorAll('.js-tilt, .portfolio-card, .amenity-card, .counter-item, .service-card-feature, .pillar-card');
     cards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -295,36 +298,45 @@ export class UIController {
   // 6b. Portfolio Category Filter
   initPortfolioFilter() {
     const filterButtons = document.querySelectorAll('.portfolio-filter-btn');
-    const projectCards = document.querySelectorAll('.project-panel, .portfolio-card');
+    const projectCards = document.querySelectorAll('.portfolio-card');
     if (!filterButtons.length || !projectCards.length) return;
 
     filterButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const category = btn.dataset.filter || 'all';
-        filterButtons.forEach((b) => b.classList.remove('is-active'));
+        filterButtons.forEach((b) => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const filter = btn.dataset.filter;
 
         projectCards.forEach((card) => {
-          const cardCat = card.dataset.category || 'all';
-          if (category === 'all' || cardCat === category || cardCat.includes(category)) {
-            card.style.display = '';
-            card.classList.remove('is-filtered-out');
-            setTimeout(() => { card.style.opacity = '1'; }, 10);
+          const category = card.dataset.category || '';
+          if (filter === 'all' || category.includes(filter)) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 20);
           } else {
             card.style.opacity = '0';
-            card.classList.add('is-filtered-out');
+            card.style.transform = 'translateY(20px)';
             setTimeout(() => {
-              if (card.classList.contains('is-filtered-out')) {
-                card.style.display = 'none';
-              }
+              card.style.display = 'none';
             }, 300);
           }
         });
+
+        if (typeof ScrollTrigger !== 'undefined') {
+          setTimeout(() => ScrollTrigger.refresh(), 350);
+        }
       });
     });
   }
 
-  // 7. Accessible Project Dialog Modal
+  // 7. Project Details Accessible Modal (<dialog>) with 17 Real Landmarks
   initProjectModal() {
     const modal = document.getElementById('project-modal');
     const closeBtn = document.getElementById('modal-close-btn');
@@ -369,7 +381,7 @@ export class UIController {
       },
       'hotel-kranti': {
         sector: 'HOSPITALITY & COMMERCIAL',
-        title: 'Hotel Kranti',
+        title: 'Hotel Kranti Commercial Hub',
         location: 'Ahilyanagar District',
         client: 'Kranti Enterprise',
         scope: '3D Elevation, Facade Modernization, RC Structural Engineering',
@@ -524,6 +536,8 @@ export class UIController {
     };
 
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    // Close on backdrop click
     modal.addEventListener('click', (e) => {
       const rect = modal.getBoundingClientRect();
       const isInDialog = (
@@ -534,9 +548,17 @@ export class UIController {
       );
       if (!isInDialog) closeModal();
     });
+
+    // Close on inquiry button inside modal
+    const modalInquire = modal.querySelector('.js-modal-inquire');
+    if (modalInquire) {
+      modalInquire.addEventListener('click', () => {
+        closeModal();
+      });
+    }
   }
 
-  // 8. Contact Form, WhatsApp Generator & Clipboard Toasts
+  // 8. Contact Form, VIP Viewing Reservation Generator & Clipboard Toasts
   initContactActions() {
     const form = document.getElementById('enquiry-form');
     const toast = document.getElementById('toast');
@@ -550,19 +572,21 @@ export class UIController {
         if (!text) return;
         try {
           await navigator.clipboard.writeText(text);
-          this.showToast(`Copied to clipboard: ${text}`);
+          this.showToast(`Copied: ${text}`);
         } catch (_) {
           this.showToast('Could not copy automatically');
         }
       });
     });
 
-    // Form Handling (Client-side validated WhatsApp / Mailto generation)
+    // Form Handling: High-Conversion VIP Viewing & Consultation WhatsApp Dispatch
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('form-name').value.trim();
         const phone = document.getElementById('form-phone').value.trim();
+        const dateInput = document.getElementById('form-date');
+        const date = dateInput ? dateInput.value : '';
         const type = document.getElementById('form-type').value;
         const location = document.getElementById('form-location').value.trim();
         const message = document.getElementById('form-message').value.trim();
@@ -575,35 +599,25 @@ export class UIController {
           return;
         }
 
-        /* 
-         * Formspree / Netlify Forms Integration Note:
-         * To submit to an endpoint, uncomment the fetch call below:
-         * 
-         * await fetch("https://formspree.io/f/YOUR_ENDPOINT", {
-         *   method: "POST",
-         *   body: new FormData(form),
-         *   headers: { 'Accept': 'application/json' }
-         * });
-         */
-
         // Collect selected services
         const selectedServices = Array.from(document.querySelectorAll('input[name="service_req"]:checked'))
           .map((cb) => cb.value)
           .join(', ');
 
         const waText = encodeURIComponent(
-          `*New Project Consultation — Anayah Associates*\n\n` +
+          `*Private Viewing & Architectural Briefing Request — Anayah Associates*\n\n` +
           `• *Client Name:* ${name}\n` +
           `• *Phone Number:* ${phone}\n` +
+          `• *Preferred Viewing Date:* ${date || 'Earliest Available'}\n` +
+          `• *Project Interest:* ${type}\n` +
           `• *Services Needed:* ${selectedServices || type}\n` +
-          `• *Project Sector:* ${type}\n` +
           `• *Site Location / Plot:* ${location || 'Shrirampur region'}\n` +
-          `• *Project Brief:* ${message || 'I would like to discuss a project with Er. Sameer Shaikh.'}`
+          `• *Architectural Brief:* ${message || 'I would like to request a private viewing of completed residences and consultation with Er. Sameer Shaikh.'}`
         );
 
         const waUrl = `https://wa.me/918788731650?text=${waText}`;
         window.open(waUrl, '_blank', 'noopener,noreferrer');
-        this.showToast('Opening WhatsApp with your project details...');
+        this.showToast('Opening WhatsApp with your VIP viewing request...');
       });
 
       // Secondary Email Trigger
@@ -612,6 +626,8 @@ export class UIController {
         emailBtn.addEventListener('click', () => {
           const name = document.getElementById('form-name').value.trim();
           const phone = document.getElementById('form-phone').value.trim();
+          const dateInput = document.getElementById('form-date');
+          const date = dateInput ? dateInput.value : '';
           const type = document.getElementById('form-type').value;
           const location = document.getElementById('form-location').value.trim();
           const message = document.getElementById('form-message').value.trim();
@@ -620,9 +636,9 @@ export class UIController {
             .join(', ');
 
           const body = encodeURIComponent(
-            `Name: ${name}\nPhone: ${phone}\nServices: ${selectedServices || type}\nProject Type: ${type}\nLocation: ${location}\n\nProject Requirements:\n${message}`
+            `Name: ${name}\nPhone: ${phone}\nPreferred Date: ${date || 'Earliest'}\nServices: ${selectedServices || type}\nProject Type: ${type}\nLocation: ${location}\n\nProject Requirements:\n${message}`
           );
-          const mailto = `mailto:sameiirshaikh@gmail.com?subject=Project%20Enquiry%20%E2%80%94%20Website&body=${body}`;
+          const mailto = `mailto:sameiirshaikh@gmail.com?subject=Private%20Viewing%20Reservation%20%E2%80%94%20Anayah%20Website&body=${body}`;
           window.location.href = mailto;
         });
       }
@@ -649,72 +665,82 @@ export class UIController {
     const toast = document.getElementById('toast');
     if (!toast) return;
     toast.textContent = msg;
-    toast.classList.add('is-visible');
+    toast.classList.add('is-active');
     setTimeout(() => {
-      toast.classList.remove('is-visible');
+      toast.classList.remove('is-active');
     }, 3200);
   }
 
-  // 9. Ongoing Live Sites Marquee with Scroll Velocity
+  // 9. Ongoing Marquee Infinite Scroll & Velocity Reactivity
   initOngoingMarquee() {
     const track = document.querySelector('.ongoing-marquee-track');
     if (!track) return;
 
+    let posX = 0;
     let baseSpeed = 0.8;
-    let currentX = 0;
-    let scrollVelocity = 0;
-    let lastY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-      const curY = window.scrollY;
-      scrollVelocity = (curY - lastY) * 0.12;
-      lastY = curY;
-    }, { passive: true });
+    let currentSpeed = baseSpeed;
+    let lastScrollY = window.scrollY;
 
     const animateMarquee = () => {
-      currentX -= (baseSpeed + scrollVelocity);
-      scrollVelocity *= 0.94; // Decay velocity
-
-      if (Math.abs(currentX) >= track.scrollWidth / 2) {
-        currentX = 0;
+      posX -= currentSpeed;
+      // Reset at half scrollWidth for seamless infinite loop
+      if (Math.abs(posX) >= track.scrollWidth / 2) {
+        posX = 0;
       }
-      track.style.transform = `translate3d(${currentX.toFixed(2)}px, 0, 0)`;
+      track.style.transform = `translate3d(${posX.toFixed(1)}px, 0, 0)`;
+
+      // Decay velocity back to base
+      currentSpeed += (baseSpeed - currentSpeed) * 0.06;
+
       requestAnimationFrame(animateMarquee);
     };
     requestAnimationFrame(animateMarquee);
+
+    window.addEventListener('scroll', () => {
+      const curY = window.scrollY;
+      const delta = Math.abs(curY - lastScrollY);
+      currentSpeed = baseSpeed + delta * 0.12;
+      lastScrollY = curY;
+    }, { passive: true });
   }
 
-  // 10. Process Timeline Drawing Line & Node Highlighting
+  // 10. Process Timeline Scroll Progression (Fill spine line)
   initProcessTimeline() {
-    if (typeof ScrollTrigger === 'undefined') return;
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    const timelineSection = document.getElementById('process');
+    const processSection = document.getElementById('process');
     const spineFill = document.querySelector('.timeline-spine-fill');
     const nodes = document.querySelectorAll('.timeline-node');
-    if (!timelineSection || !spineFill) return;
+    if (!processSection || !spineFill) return;
 
     ScrollTrigger.create({
-      trigger: timelineSection,
+      trigger: processSection,
       start: 'top 70%',
-      end: 'bottom 60%',
+      end: 'bottom 80%',
       scrub: 0.5,
       onUpdate: (self) => {
         const p = self.progress;
         spineFill.style.height = `${(p * 100).toFixed(1)}%`;
+
+        // Activate step nodes as spine line crosses them
         nodes.forEach((node, idx) => {
           const threshold = idx / (nodes.length - 1);
-          node.classList.toggle('is-active', p >= threshold);
+          if (p >= threshold * 0.9) {
+            node.classList.add('is-active');
+          } else {
+            node.classList.remove('is-active');
+          }
         });
       }
     });
   }
 
-  // 11. Smooth Back to Top
+  // 11. Back to Top Button
   initBackToTop() {
     const backBtn = document.getElementById('back-to-top');
     if (!backBtn) return;
-    backBtn.addEventListener('click', (e) => {
-      e.preventDefault();
+
+    backBtn.addEventListener('click', () => {
       if (window.lenis) {
         window.lenis.scrollTo(0, { duration: 1.5 });
       } else {
